@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notifications"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Оповещения" Height="225" Width="325"
+        WindowStartupLocation="CenterOwner">
+    <Grid IsSharedSizeScope="True" Margin="5,0,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="BookLabels"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Книга"/>
+            <ComboBox Name="cbBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="BookLabels"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row ="0" Content="Автор"/>
+            <TextBox Grid.Column="1" Grid.Row="0"/>
+            <Label Grid.Column="0" Grid.Row ="1" Content="Название"/>
+            <TextBox Grid.Column="1" Grid.Row="1"/>
+            <Label Grid.Column="0" Grid.Row ="2" Content="Прочитана?"/>
+            <TextBox Grid.Column="1" Grid.Row="2"/>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
+                        HorizontalAlignment="Right" Orientation="Horizontal"
+                        Margin="0,5,0,5">
+                <Button x:Name="btnAddBook" Content="Добавить книгу"
+                        Margin="5,0,5,0" Padding="4,2"/>
+                <Button x:Name="btnChangeReadStatus" Content="Отметить статус прочтения"
+                        Margin="5,0,5,0" Padding="4,2"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
