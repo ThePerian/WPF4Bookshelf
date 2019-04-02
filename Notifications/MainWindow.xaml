@@ -20,7 +20,8 @@
             <Label Grid.Column="0" Content="Книга"/>
             <ComboBox Name="cbBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1"
+              DataContext="{Binding ElementName=cbBooks, Path=SelectedItem}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="BookLabels"/>
                 <ColumnDefinition Width="*"/>
@@ -32,11 +33,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row ="0" Content="Автор"/>
-            <TextBox Grid.Column="1" Grid.Row="0"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Author}"/>
             <Label Grid.Column="0" Grid.Row ="1" Content="Название"/>
-            <TextBox Grid.Column="1" Grid.Row="1"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=BookName}"/>
             <Label Grid.Column="0" Grid.Row ="2" Content="Прочитана?"/>
-            <TextBox Grid.Column="1" Grid.Row="2"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ReadStatus}"/>
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">

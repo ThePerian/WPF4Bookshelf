@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Notifications.Models;
 
 namespace Notifications
 {
@@ -20,9 +21,31 @@ namespace Notifications
     /// </summary>
     public partial class MainWindow : Window
     {
+        readonly IList<Inventory> _books;
+
         public MainWindow()
         {
             InitializeComponent();
+            _books = new List<Inventory>
+            {
+                new Inventory
+                {
+                    BookId = 1,
+                    Author = "Дж. Р. Р. Толкин",
+                    BookName = "Сильмариллион",
+                    ReadStatus = true
+                },
+                new Inventory
+                {
+                    BookId = 1,
+                    Author = "Анджей Сапковский",
+                    BookName = "Башная ласточки",
+                    ReadStatus = false
+                }
+            };
+
+            //Связать список книг с комбобоксом для отображения в текстбоксы
+            cbBooks.ItemsSource = _books;
         }
     }
 }
