@@ -37,14 +37,14 @@
             <Label Grid.Column="0" Grid.Row ="1" Content="Название"/>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=BookName}"/>
             <Label Grid.Column="0" Grid.Row ="2" Content="Прочитана?"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ReadStatus}"/>
+            <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=ReadStatus}"/>
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
                         Margin="5,0,5,0" Padding="4,2"/>
-                <Button x:Name="btnChangeReadStatus" Content="Отметить статус прочтения"
-                        Margin="5,0,5,0" Padding="4,2"/>
+                <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
+                        Margin="5,0,5,0" Padding="4,2" Click="BtnChangeReadStatus_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

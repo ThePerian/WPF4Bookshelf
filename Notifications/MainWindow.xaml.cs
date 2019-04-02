@@ -47,5 +47,12 @@ namespace Notifications
             //Связать список книг с комбобоксом для отображения в текстбоксы
             cbBooks.ItemsSource = _books;
         }
+
+        private void BtnChangeReadStatus_Click(object sender, RoutedEventArgs e)
+        {
+            var book = _books.FirstOrDefault(x => x.BookId == ((Inventory)cbBooks.SelectedItem)?.BookId);
+            if (book != null)
+                book.ReadStatus = !book.ReadStatus;
+        }
     }
 }
