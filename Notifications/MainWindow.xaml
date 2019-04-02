@@ -42,7 +42,7 @@
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
-                        Margin="5,0,5,0" Padding="4,2"/>
+                        Margin="5,0,5,0" Padding="4,2" Click="BtnAddBook_Click"/>
                 <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
                         Margin="5,0,5,0" Padding="4,2" Click="BtnChangeReadStatus_Click"/>
             </StackPanel>

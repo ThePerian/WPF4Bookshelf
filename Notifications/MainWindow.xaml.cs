@@ -54,5 +54,18 @@ namespace Notifications
             if (book != null)
                 book.ReadStatus = !book.ReadStatus;
         }
+
+        private void BtnAddBook_Click(object sender, RoutedEventArgs e)
+        {
+            var maxCount = _books?.Max(x => x.BookId) ?? 0;
+            _books?.Add(
+                new Inventory
+                {
+                    BookId = ++maxCount,
+                    Author = "Джо Аберкромби",
+                    BookName = "Герои",
+                    ReadStatus = false
+                });
+        }
     }
 }
