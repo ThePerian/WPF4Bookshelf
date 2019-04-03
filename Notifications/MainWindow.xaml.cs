@@ -21,12 +21,12 @@ namespace Notifications
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly IList<Inventory> _books;
+        readonly InventoryList _books;
 
         public MainWindow()
         {
             InitializeComponent();
-            _books = new List<Inventory>
+            _books = new InventoryList(new List<Inventory>
             {
                 new Inventory
                 {
@@ -42,30 +42,43 @@ namespace Notifications
                     BookName = "Башная ласточки",
                     ReadStatus = false
                 }
-            };
+            });
 
             //Связать список книг с комбобоксом для отображения в текстбоксы
-            cbBooks.ItemsSource = _books;
+            cboBooks.ItemsSource = _books;
         }
 
         private void BtnChangeReadStatus_Click(object sender, RoutedEventArgs e)
         {
-            var book = _books.FirstOrDefault(x => x.BookId == ((Inventory)cbBooks.SelectedItem)?.BookId);
+            var book = 
+                _books.FirstOrDefault(x => x.BookId == ((Inventory)cboBooks.SelectedItem)?.BookId);
             if (book != null)
                 book.ReadStatus = !book.ReadStatus;
         }
 
         private void BtnAddBook_Click(object sender, RoutedEventArgs e)
         {
-            var maxCount = _books?.Max(x => x.BookId) ?? 0;
+            var maxCount = _books?.Max(x => x?.BookId) ?? 0;
             _books?.Add(
                 new Inventory
                 {
                     BookId = ++maxCount,
-                    Author = "Джо Аберкромби",
-                    BookName = "Герои",
-                    ReadStatus = false
+                    Author = (tbAuthor.Text == "") ? "Без автора" : tbAuthor.Text,
+                    BookName = (tbBookName.Text == "") ? "Без названия" : tbBookName.Text,
+                    ReadStatus = cbxReadStatus.IsChecked ?? false
                 });
+        }
+
+        private void BtnRemoveBook_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _books.RemoveAt(cboBooks.SelectedIndex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

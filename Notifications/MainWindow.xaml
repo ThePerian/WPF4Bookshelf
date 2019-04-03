@@ -18,10 +18,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Книга"/>
-            <ComboBox Name="cbBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
+            <ComboBox Name="cboBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
         </Grid>
         <Grid Grid.Row="1"
-              DataContext="{Binding ElementName=cbBooks, Path=SelectedItem}">
+              DataContext="{Binding ElementName=cboBooks, Path=SelectedItem}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="BookLabels"/>
                 <ColumnDefinition Width="*"/>
@@ -33,11 +33,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row ="0" Content="Автор"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Author}"/>
+            <TextBox x:Name="tbAuthor" Grid.Column="1" Grid.Row="0" 
+                     Text="{Binding Path=Author}"/>
             <Label Grid.Column="0" Grid.Row ="1" Content="Название"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=BookName}"/>
+            <TextBox x:Name="tbBookName" Grid.Column="1" Grid.Row="1" 
+                     Text="{Binding Path=BookName}"/>
             <Label Grid.Column="0" Grid.Row ="2" Content="Прочитана?"/>
-            <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=ReadStatus}"/>
+            <CheckBox x:Name="cbxReadStatus" Grid.Column="1" Grid.Row="2" 
+                      IsChecked="{Binding Path=ReadStatus}"/>
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">
@@ -45,6 +48,8 @@
                         Margin="5,0,5,0" Padding="4,2" Click="BtnAddBook_Click"/>
                 <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
                         Margin="5,0,5,0" Padding="4,2" Click="BtnChangeReadStatus_Click"/>
+                <Button x:Name="btnRemoveBook" Content="Удалить книгу"
+                        Margin="5,0,5,0" Padding="4,2" Click="BtnRemoveBook_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
