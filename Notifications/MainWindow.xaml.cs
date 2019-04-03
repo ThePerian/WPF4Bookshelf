@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Models;
+using System.Collections.ObjectModel;
 
 namespace Notifications
 {
@@ -21,28 +22,30 @@ namespace Notifications
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly InventoryList _books;
+        readonly ObservableCollection<Inventory> _books;
 
         public MainWindow()
         {
             InitializeComponent();
-            _books = new InventoryList(new List<Inventory>
+            _books = new ObservableCollection<Inventory>
             {
                 new Inventory
                 {
                     BookId = 1,
                     Author = "Дж. Р. Р. Толкин",
                     BookName = "Сильмариллион",
-                    ReadStatus = true
+                    ReadStatus = true,
+                    IsChanged = false
                 },
                 new Inventory
                 {
                     BookId = 1,
                     Author = "Анджей Сапковский",
                     BookName = "Башная ласточки",
-                    ReadStatus = false
+                    ReadStatus = false,
+                    IsChanged = false
                 }
-            });
+            };
 
             //Связать список книг с комбобоксом для отображения в текстбоксы
             cboBooks.ItemsSource = _books;
