@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Notifications.Models
 {
-    public virtual class EntityBase : INotifyDataErrorInfo
+    public abstract class EntityBase : INotifyDataErrorInfo
     {
         protected readonly Dictionary<string, List<string>> _errors =
             new Dictionary<string, List<string>>();

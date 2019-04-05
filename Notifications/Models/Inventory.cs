@@ -5,11 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Notifications.Models
 {
     public partial class Inventory: INotifyPropertyChanged
     {
+        //Избыточно, т.к. int уже не допускает Null
+        [Required]
         private int _bookId;
         public int BookId
         {
@@ -21,6 +24,7 @@ namespace Notifications.Models
                 OnPropertyChanged();
             }
         }
+        [StringLength(50)]
         private string _author;
         public string Author
         {
@@ -32,6 +36,7 @@ namespace Notifications.Models
                 OnPropertyChanged(nameof(Author));
             }
         }
+        [StringLength(50)]
         private string _bookName;
         public string BookName
         {
