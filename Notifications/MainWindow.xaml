@@ -83,7 +83,11 @@
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
-                        Margin="5,0,5,0" Padding="4,2" Click="BtnAddBook_Click"/>
+                        Margin="5,0,5,0" Padding="4,2"
+                        Command="{Binding Path=AddBookCmd,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                AncestorType={x:Type Window}}}"
+                        CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
                 <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
                         Margin="5,0,5,0" Padding="4,2"
                         Command="{Binding Path=ChangeReadStatusCmd,
@@ -91,7 +95,11 @@
                                 AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
                 <Button x:Name="btnRemoveBook" Content="Удалить книгу"
-                        Margin="5,0,5,0" Padding="4,2" Click="BtnRemoveBook_Click"/>
+                        Margin="5,0,5,0" Padding="4,2"
+                        Command="{Binding Path=RemoveBookCmd,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                AncestorType={x:Type Window}}}"
+                        CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
             </StackPanel>
             <Label Grid.Column="0" Grid.Row="5" Content="Коллекция изменена"/>
             <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"

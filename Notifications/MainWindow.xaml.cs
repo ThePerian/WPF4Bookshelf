@@ -24,9 +24,18 @@ namespace Notifications
     public partial class MainWindow : Window
     {
         readonly ObservableCollection<Inventory> _books;
+
         private ICommand _changeReadStatusCommand = null;
         public ICommand ChangeReadStatusCmd =>
             _changeReadStatusCommand ?? (_changeReadStatusCommand = new ChangeReadStatusCommand());
+        private ICommand _removeBookCommand = null;
+        public ICommand RemoveBookCmd =>
+            _removeBookCommand
+            ?? (_removeBookCommand = new RemoveBookCommand(_books));
+        private ICommand _addBookCommand = null;
+        public ICommand AddBookCmd =>
+            _addBookCommand 
+            ?? (_addBookCommand = new AddBookCommand(_books, this));
 
         public MainWindow()
         {
@@ -53,31 +62,6 @@ namespace Notifications
 
             //Связать список книг с комбобоксом для отображения в текстбоксы
             cboBooks.ItemsSource = _books;
-        }
-
-        private void BtnAddBook_Click(object sender, RoutedEventArgs e)
-        {
-            var maxCount = _books?.Max(x => x?.BookId) ?? 0;
-            _books?.Add(
-                new Inventory
-                {
-                    BookId = ++maxCount,
-                    Author = (tbAuthor.Text == "") ? "Без автора" : tbAuthor.Text,
-                    BookName = (tbBookName.Text == "") ? "Без названия" : tbBookName.Text,
-                    ReadStatus = cbxReadStatus.IsChecked ?? false
-                });
-        }
-
-        private void BtnRemoveBook_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                _books.RemoveAt(cboBooks.SelectedIndex);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }
