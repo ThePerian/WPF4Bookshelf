@@ -29,11 +29,6 @@ namespace Notifications.Models
             {
                 if (value == _author) return;
                 _author = value;
-                //В целях тестирования запретим добавление книг одного автора
-                if (Author.ToLower().Contains("роулинг"))
-                    AddError(nameof(Author), "Указан не допустимый автор");
-                else
-                    ClearErrors(nameof(Author));
                 OnPropertyChanged(nameof(Author));
             }
         }

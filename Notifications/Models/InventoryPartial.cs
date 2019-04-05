@@ -24,7 +24,7 @@ namespace Notifications.Models
 
         public bool HasErrors => _errors.Count != 0;
 
-        public string Error => throw new NotImplementedException();
+        public string Error { get; }
 
         public string this[string columnName]
         {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notifications"
         mc:Ignorable="d"
-        Title="Оповещения" Height="255" Width="525"
+        Title="Оповещения" Height="300" Width="525"
         WindowStartupLocation="CenterOwner">
     <Grid IsSharedSizeScope="True" Margin="5,5,5,5">
         <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
             <Label Grid.Column="0" Content="Книга"/>
             <ComboBox Name="cboBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
         </Grid>
-        <Grid Grid.Row="1"
+        <Grid Name="testGrid" Grid.Row="1"
               DataContext="{Binding ElementName=cboBooks, Path=SelectedItem}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="BookLabels"/>
@@ -33,6 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row ="0" Content="ID"/>
             <TextBox x:Name="tbId" Grid.Column="1" Grid.Row="0" 
@@ -63,6 +64,14 @@
             <Label Grid.Column="0" Grid.Row="5" Content="Коллекция изменена"/>
             <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"
                       Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding Path=IsChanged}"/>
+            <ListBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2"
+                     ItemsSource="{Binding ElementName=testGrid, Path=(Validation.Errors)}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding Path=ErrorContent}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
