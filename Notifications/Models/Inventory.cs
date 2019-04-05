@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Notifications.Models
 {
-    public class Inventory: INotifyPropertyChanged
+    public partial class Inventory: INotifyPropertyChanged
     {
         private int _bookId;
         public int BookId
@@ -29,7 +29,8 @@ namespace Notifications.Models
             {
                 if (value == _author) return;
                 _author = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Author));
+                OnPropertyChanged(nameof(BookName));
             }
         }
         private string _bookName;
@@ -40,7 +41,8 @@ namespace Notifications.Models
             {
                 if (value == _bookName) return;
                 _bookName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(BookName));
+                OnPropertyChanged(nameof(Author));
             }
         }
         private bool _readStatus;

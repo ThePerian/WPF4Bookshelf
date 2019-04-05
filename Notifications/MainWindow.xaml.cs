@@ -39,7 +39,7 @@ namespace Notifications
                 },
                 new Inventory
                 {
-                    BookId = 1,
+                    BookId = 2,
                     Author = "Анджей Сапковский",
                     BookName = "Башная ласточки",
                     ReadStatus = false,

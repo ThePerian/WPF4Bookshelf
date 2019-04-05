@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notifications"
         mc:Ignorable="d"
-        Title="Оповещения" Height="225" Width="525"
+        Title="Оповещения" Height="255" Width="525"
         WindowStartupLocation="CenterOwner">
-    <Grid IsSharedSizeScope="True" Margin="5,0,5,5">
+    <Grid IsSharedSizeScope="True" Margin="5,5,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -32,17 +32,25 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row ="0" Content="Автор"/>
-            <TextBox x:Name="tbAuthor" Grid.Column="1" Grid.Row="0" 
-                     Text="{Binding Path=Author, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Column="0" Grid.Row ="1" Content="Название"/>
-            <TextBox x:Name="tbBookName" Grid.Column="1" Grid.Row="1" 
-                     Text="{Binding Path=BookName, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Column="0" Grid.Row ="2" Content="Прочитана?"/>
-            <CheckBox x:Name="cbxReadStatus" Grid.Column="1" Grid.Row="2" 
-                      IsChecked="{Binding Path=ReadStatus, UpdateSourceTrigger=PropertyChanged}"/>
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
+            <Label Grid.Column="0" Grid.Row ="0" Content="ID"/>
+            <TextBox x:Name="tbId" Grid.Column="1" Grid.Row="0" 
+                     Text="{Binding Path=BookId, UpdateSourceTrigger=PropertyChanged,
+                    ValidatesOnExceptions=True, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Column="0" Grid.Row ="1" Content="Автор"/>
+            <TextBox x:Name="tbAuthor" Grid.Column="1" Grid.Row="1" 
+                     Text="{Binding Path=Author, UpdateSourceTrigger=PropertyChanged,
+                    ValidatesOnExceptions=True, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Column="0" Grid.Row ="2" Content="Название"/>
+            <TextBox x:Name="tbBookName" Grid.Column="1" Grid.Row="2" 
+                     Text="{Binding Path=BookName, UpdateSourceTrigger=PropertyChanged,
+                    ValidatesOnExceptions=True, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Column="0" Grid.Row ="3" Content="Прочитана?"/>
+            <CheckBox x:Name="cbxReadStatus" Grid.Column="1" Grid.Row="3" 
+                      IsChecked="{Binding Path=ReadStatus, UpdateSourceTrigger=PropertyChanged,
+                    ValidatesOnExceptions=True, ValidatesOnDataErrors=True}"/>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"
                         HorizontalAlignment="Right" Orientation="Horizontal"
                         Margin="0,5,0,5">
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
@@ -52,8 +60,8 @@
                 <Button x:Name="btnRemoveBook" Content="Удалить книгу"
                         Margin="5,0,5,0" Padding="4,2" Click="BtnRemoveBook_Click"/>
             </StackPanel>
-            <Label Grid.Column="0" Grid.Row="4" Content="Коллекция изменена"/>
-            <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"
+            <Label Grid.Column="0" Grid.Row="5" Content="Коллекция изменена"/>
+            <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"
                       Margin="10,0,0,0" IsEnabled="False" IsChecked="{Binding Path=IsChanged}"/>
         </Grid>
     </Grid>
