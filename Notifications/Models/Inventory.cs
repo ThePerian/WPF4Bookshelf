@@ -12,8 +12,8 @@ namespace Notifications.Models
     public partial class Inventory: INotifyPropertyChanged
     {
         //Избыточно, т.к. int уже не допускает Null
-        [Required]
         private int _bookId;
+        [Required]
         public int BookId
         {
             get { return _bookId; }
@@ -24,8 +24,8 @@ namespace Notifications.Models
                 OnPropertyChanged();
             }
         }
-        [StringLength(50)]
         private string _author;
+        [StringLength(50)]
         public string Author
         {
             get { return _author; }
@@ -36,8 +36,8 @@ namespace Notifications.Models
                 OnPropertyChanged(nameof(Author));
             }
         }
-        [StringLength(50)]
         private string _bookName;
+        [StringLength(50)]
         public string BookName
         {
             get { return _bookName; }

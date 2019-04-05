@@ -17,10 +17,12 @@ namespace Notifications.Models
         {
             get
             {
+                string[] errors = null;
                 bool hasError = false;
                 switch (columnName)
                 {
                     case nameof(BookId):
+                        errors = GetErrorsFromAnnotaions(nameof(BookId), BookId);
                         break;
                     case nameof(Author):
                         hasError = CheckAuthorAndBookName();
@@ -30,14 +32,23 @@ namespace Notifications.Models
                             hasError = true;
                         }
                         if (!hasError) ClearErrors(nameof(Author));
+                        errors = GetErrorsFromAnnotaions(nameof(Author), Author);
                         break;
                     case nameof(BookName):
                         hasError = CheckAuthorAndBookName();
                         if (!hasError) ClearErrors(nameof(BookName));
+                        errors = GetErrorsFromAnnotaions(nameof(BookName), BookName);
                         break;
                     case nameof(ReadStatus):
+                        errors = GetErrorsFromAnnotaions(nameof(ReadStatus), ReadStatus);
                         break;
                 }
+                if (errors != null && errors.Length > 0)
+                {
+                    AddErrors(columnName, errors.ToList());
+                    hasError = true;
+                }
+                if (!hasError) ClearErrors(columnName);
                 return string.Empty;
             }
         }

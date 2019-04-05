@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,14 @@ namespace Notifications.Models
         protected void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        protected string[] GetErrorsFromAnnotaions<T>(string propertyName, T value)
+        {
+            var results = new List<ValidationResult>();
+            var vc = new ValidationContext(this, null, null) { MemberName = propertyName };
+            var isValid = Validator.TryValidateProperty(value, vc, results);
+            return (isValid) ? null : Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);
         }
     }
 }

@@ -7,6 +7,34 @@
         mc:Ignorable="d"
         Title="Оповещения" Height="300" Width="525"
         WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="Background" Value="Pink"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self},
+                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="Validation.ErrorTemplate">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <DockPanel LastChildFill="True">
+                                    <TextBlock Foreground="Red" FontSize="20" 
+                                               Text="!" Margin="0,0,5,0"
+                                               ToolTip="{Binding ElementName=controlWithError,
+                                        Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                                    <Border BorderBrush="Red" BorderThickness="1">
+                                        <AdornedElementPlaceholder Name="controlWithError"/>
+                                    </Border>
+                                </DockPanel>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid IsSharedSizeScope="True" Margin="5,5,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
