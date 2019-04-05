@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Models;
+using Notifications.Commands;
 using System.Collections.ObjectModel;
 
 namespace Notifications
@@ -23,6 +24,9 @@ namespace Notifications
     public partial class MainWindow : Window
     {
         readonly ObservableCollection<Inventory> _books;
+        private ICommand _changeReadStatusCommand = null;
+        public ICommand ChangeReadStatusCmd =>
+            _changeReadStatusCommand ?? (_changeReadStatusCommand = new ChangeReadStatusCommand());
 
         public MainWindow()
         {
@@ -49,14 +53,6 @@ namespace Notifications
 
             //Связать список книг с комбобоксом для отображения в текстбоксы
             cboBooks.ItemsSource = _books;
-        }
-
-        private void BtnChangeReadStatus_Click(object sender, RoutedEventArgs e)
-        {
-            var book = 
-                _books.FirstOrDefault(x => x.BookId == ((Inventory)cboBooks.SelectedItem)?.BookId);
-            if (book != null)
-                book.ReadStatus = !book.ReadStatus;
         }
 
         private void BtnAddBook_Click(object sender, RoutedEventArgs e)

@@ -85,7 +85,11 @@
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
                         Margin="5,0,5,0" Padding="4,2" Click="BtnAddBook_Click"/>
                 <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
-                        Margin="5,0,5,0" Padding="4,2" Click="BtnChangeReadStatus_Click"/>
+                        Margin="5,0,5,0" Padding="4,2"
+                        Command="{Binding Path=ChangeReadStatusCmd,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                AncestorType={x:Type Window}}}"
+                        CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
                 <Button x:Name="btnRemoveBook" Content="Удалить книгу"
                         Margin="5,0,5,0" Padding="4,2" Click="BtnRemoveBook_Click"/>
             </StackPanel>
