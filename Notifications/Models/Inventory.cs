@@ -30,7 +30,6 @@ namespace Notifications.Models
                 if (value == _author) return;
                 _author = value;
                 OnPropertyChanged(nameof(Author));
-                OnPropertyChanged(nameof(BookName));
             }
         }
         private string _bookName;
@@ -42,7 +41,6 @@ namespace Notifications.Models
                 if (value == _bookName) return;
                 _bookName = value;
                 OnPropertyChanged(nameof(BookName));
-                OnPropertyChanged(nameof(Author));
             }
         }
         private bool _readStatus;

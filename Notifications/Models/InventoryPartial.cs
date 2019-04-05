@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,44 +8,54 @@ using System.Threading.Tasks;
 
 namespace Notifications.Models
 {
-    public partial class Inventory : IDataErrorInfo
+    public partial class Inventory : INotifyDataErrorInfo
     {
-        public string this[string columnName]
+        private readonly Dictionary<string, List<string>> _errors =
+            new Dictionary<string, List<string>>();
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public IEnumerable GetErrors(string propertyName)
         {
-            get
-            {
-                switch (columnName)
-                {
-                    case nameof(BookId):
-                        break;
-                    //В целях тестирования запретим добавлять книги одного автора
-                    case nameof(Author):
-                        if (Author.Contains("Роулинг"))
-                            return "Указан недопустимый автор";
-                        return CheckAuthorAndName();
-                    case nameof(BookName):
-                        return CheckAuthorAndName();
-                    case nameof(ReadStatus):
-                        break;
-                }
-                return string.Empty;
-            }
+            if (string.IsNullOrEmpty(propertyName))
+                return _errors.Values;
+            return _errors.ContainsKey(propertyName) ? _errors[propertyName] : null;
         }
 
-        internal string CheckAuthorAndName()
+        public bool HasErrors => _errors.Count != 0;
+
+        private void OnErrorsChanged(string propertyName)
         {
-            //В целях тестирования запретим определенное сочетание автора и названия книги
-            if (Author.ToLower().Contains("толкин") 
-                && BookName.ToLower().Contains("гарри поттер"))
-            {
-                return $"{Author} не писал(а) таких книг!";
-            }
-            return string.Empty;
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        public string Error
+        protected void ClearErrors(string propertyName = "")
         {
-            get;
+            _errors.Remove(propertyName);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void AddError(string propertyName, string error)
+        {
+            AddErrors(propertyName, new List<string> { error });
+        }
+
+        private void AddErrors(string propertyName, List<string> errors)
+        {
+            var changed = false;
+            if (!_errors.ContainsKey(propertyName))
+            {
+                _errors.Add(propertyName, new List<string>());
+                changed = true;
+            }
+            errors.ToList().ForEach(x =>
+            {
+                if (_errors[propertyName].Contains(x)) return;
+                _errors[propertyName].Add(x);
+                changed = true;
+            });
+            if (changed)
+                OnErrorsChanged(propertyName);
         }
     }
 }
