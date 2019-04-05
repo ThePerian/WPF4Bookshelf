@@ -46,7 +46,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Книга"/>
-            <ComboBox Name="cboBooks" Grid.Column="1" DisplayMemberPath="BookName"/>
+            <ComboBox Name="cboBooks" Grid.Column="1" DisplayMemberPath="BookName"
+                      ItemsSource="{Binding Path=Books}"/>
         </Grid>
         <Grid Name="testGrid" Grid.Row="1"
               DataContext="{Binding ElementName=cboBooks, Path=SelectedItem}">
@@ -84,19 +85,18 @@
                         Margin="0,5,0,5">
                 <Button x:Name="btnAddBook" Content="Добавить книгу"
                         Margin="5,0,5,0" Padding="4,2"
-                        Command="{Binding Path=AddBookCmd,
+                        Command="{Binding Path=DataContext.AddBookCmd,
                             RelativeSource={RelativeSource Mode=FindAncestor,
-                                AncestorType={x:Type Window}}}"
-                        CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
+                                AncestorType={x:Type Window}}}"/>
                 <Button x:Name="btnChangeReadStatus" Content="Изменить статус прочтения"
                         Margin="5,0,5,0" Padding="4,2"
-                        Command="{Binding Path=ChangeReadStatusCmd,
+                        Command="{Binding Path=DataContext.ChangeReadStatusCmd,
                             RelativeSource={RelativeSource Mode=FindAncestor,
                                 AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>
                 <Button x:Name="btnRemoveBook" Content="Удалить книгу"
                         Margin="5,0,5,0" Padding="4,2"
-                        Command="{Binding Path=RemoveBookCmd,
+                        Command="{Binding Path=DataContext.RemoveBookCmd,
                             RelativeSource={RelativeSource Mode=FindAncestor,
                                 AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboBooks, Path=SelectedItem}"/>

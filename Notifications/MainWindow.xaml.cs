@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Models;
 using Notifications.Commands;
+using Notifications.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace Notifications
@@ -23,45 +24,10 @@ namespace Notifications
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly ObservableCollection<Inventory> _books;
-
-        private ICommand _changeReadStatusCommand = null;
-        public ICommand ChangeReadStatusCmd =>
-            _changeReadStatusCommand ?? (_changeReadStatusCommand = new ChangeReadStatusCommand());
-        private ICommand _removeBookCommand = null;
-        public ICommand RemoveBookCmd =>
-            _removeBookCommand
-            ?? (_removeBookCommand = new RemoveBookCommand(_books));
-        private ICommand _addBookCommand = null;
-        public ICommand AddBookCmd =>
-            _addBookCommand 
-            ?? (_addBookCommand = new AddBookCommand(_books, this));
-
         public MainWindow()
         {
             InitializeComponent();
-            _books = new ObservableCollection<Inventory>
-            {
-                new Inventory
-                {
-                    BookId = 1,
-                    Author = "Дж. Р. Р. Толкин",
-                    BookName = "Сильмариллион",
-                    ReadStatus = true,
-                    IsChanged = false
-                },
-                new Inventory
-                {
-                    BookId = 2,
-                    Author = "Анджей Сапковский",
-                    BookName = "Башная ласточки",
-                    ReadStatus = false,
-                    IsChanged = false
-                }
-            };
-
-            //Связать список книг с комбобоксом для отображения в текстбоксы
-            cboBooks.ItemsSource = _books;
+            this.DataContext = new MainWindowViewModel(this);
         }
     }
 }

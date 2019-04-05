@@ -12,10 +12,10 @@ namespace Notifications.Commands
         private readonly MainWindow _mainWindow;
         private readonly IList<Inventory> _books;
 
-        public AddBookCommand(IList<Inventory> books, MainWindow window)
+        public AddBookCommand(IList<Inventory> books, MainWindow mainWindow)
         {
             _books = books;
-            _mainWindow = window;
+            _mainWindow = mainWindow;
         }
 
         public override bool CanExecute(object parameter) => true;
