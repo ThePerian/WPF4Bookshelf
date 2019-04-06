@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Notifications.Models;
 using Notifications.Commands;
+using BookshelfDALEF.Models;
+using BookshelfDALEF.Repos;
 
 namespace Notifications.ViewModels
 {
@@ -32,25 +33,7 @@ namespace Notifications.ViewModels
         {
             _mainWindow = mainWindow;
 
-            Books = new ObservableCollection<Inventory>
-            {
-                new Inventory
-                {
-                    BookId = 1,
-                    Author = "Дж. Р. Р. Толкин",
-                    BookName = "Сильмариллион",
-                    ReadStatus = true,
-                    IsChanged = false
-                },
-                new Inventory
-                {
-                    BookId = 2,
-                    Author = "Анджей Сапковский",
-                    BookName = "Башная ласточки",
-                    ReadStatus = false,
-                    IsChanged = false
-                }
-            };
+            Books = new ObservableCollection<Inventory>(new InventoryRepo().GetAll());
         }
     }
 }

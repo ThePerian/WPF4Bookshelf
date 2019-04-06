@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Notifications.Models;
+using BookshelfDALEF.Models;
 
 namespace Notifications.Commands
 {
@@ -27,9 +27,9 @@ namespace Notifications.Commands
                 new Inventory
                 {
                     BookId = ++maxCount,
-                    Author = (_mainWindow.tbAuthor.Text == "") 
+                    Author = (_mainWindow.tbAuthor.Text == "")
                         ? "Без автора" : _mainWindow.tbAuthor.Text,
-                    BookName = (_mainWindow.tbBookName.Text == "") 
+                    BookName = (_mainWindow.tbBookName.Text == "")
                         ? "Без названия" : _mainWindow.tbBookName.Text,
                     ReadStatus = _mainWindow.cbxReadStatus.IsChecked ?? false
                 });

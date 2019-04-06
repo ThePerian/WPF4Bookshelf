@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Notifications.Models;
 using Notifications.Commands;
 using Notifications.ViewModels;
 using System.Collections.ObjectModel;
